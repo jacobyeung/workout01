@@ -2,9 +2,9 @@
 
 curry = read.csv("../data/stephen-curry.csv", stringsAsFactors = FALSE)
 iguodala = read.csv("../data/andre-iguodala.csv", stringsAsFactors = FALSE)
-green = read.csv("../data/graymond-green.csv", stringsAsFactors = FALSE)
+green = read.csv("../data/draymond-green.csv", stringsAsFactors = FALSE)
 durant = read.csv("../data/kevin-durant.csv", stringsAsFactors = FALSE)
-thompson = read.csv("../data/klay-thopmson.csv", stringsAsFactors = FALSE)
+thompson = read.csv("../data/klay-thompson.csv", stringsAsFactors = FALSE)
 
 curry$name = rep("Stephen Curry", times = nrow(curry))
 iguodala$name = rep("Andre Iguodala", times = nrow(iguodala))
@@ -26,8 +26,8 @@ thompson$shot_made_flag[thompson$shot_made_flag == "n"] = "shot_no"
 curry$minute = (curry$period)*12 - curry$minutes_remaining
 iguodala$minute = (iguodala$period)*12 - iguodala$minutes_remaining
 green$minute = (green$period)*12 - green$minutes_remaining
-durant$mintue = (durant$period)*12 - durant$minutes_remaining
-thompson$mintue = (thompson$period)*12 - thompson$minutes_remaining
+durant$minute = (durant$period)*12 - durant$minutes_remaining
+thompson$minute = (thompson$period)*12 - thompson$minutes_remaining
 
 sink("../output/stephen-curry-summary.txt")
 print(summary(curry))
@@ -45,11 +45,11 @@ sink("../output/klay-thopmson-summary.txt")
 print(summary(thompson))
 sink()
 
-shot-data = rbind(curry, iguodala, green, durant, thompson)
-write.csv(shot-data, file = "../data/shots-data.csv")
+shot_data = rbind(curry, iguodala, green, durant, thompson)
+write.csv(shot_data, file = "../data/shots-data.csv")
 
 sink("../output/shots-data-summary.txt")
-print(summary(shot-data))
+print(summary(shot_data))
 sink()
 
 
