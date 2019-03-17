@@ -1,0 +1,150 @@
+---
+title: "Workout 1"
+author: "Jacob Yeung"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+#Effective Shooting Percentages
+shots_data = read.csv("../data/shots-data.csv")
+
+curry_attempt = shots_data$shot_type[shots_data$name == "Stephen Curry"]
+curry_made = shots_data$shot_made[shots_data$name == "Stephen Curry"]
+curry2_attempt = curry_attempt[curry_attempt == "2PT Field Goal"]
+curry2_made = curry_made[curry_attempt == "2PT Field Goal"]
+curry2_success = curry2_made[curry2_made == "shot_yes"]
+curry2_percent = length(curry2_success) / length(curry2_attempt)
+curry3_attempt = curry_attempt[curry_attempt == "3PT Field Goal"]
+curry3_made = curry_made[curry_attempt == "3PT Field Goal"]
+curry3_success = curry3_made[curry3_made == "shot_yes"]
+curry3_percent = length(curry3_success) / length(curry3_attempt)
+curry_percent = length(curry_made[curry_made == "shot_yes"]) / length(curry_made)
+
+iguodala_attempt = shots_data$shot_type[shots_data$name == "Andre Iguodala"]
+iguodala_made = shots_data$shot_made[shots_data$name == "Andre Iguodala"]
+iguodala2_attempt = iguodala_attempt[iguodala_attempt == "2PT Field Goal"]
+iguodala2_made = iguodala_made[iguodala_attempt == "2PT Field Goal"]
+iguodala2_success = iguodala2_made[iguodala2_made == "shot_yes"]
+iguodala2_percent = length(iguodala2_success) / length(iguodala2_attempt)
+iguodala3_attempt = iguodala_attempt[iguodala_attempt == "3PT Field Goal"]
+iguodala3_made = iguodala_made[iguodala_attempt == "3PT Field Goal"]
+iguodala3_success = iguodala3_made[iguodala3_made == "shot_yes"]
+iguodala3_percent = length(iguodala3_success) / length(iguodala3_attempt)
+iguodala_percent = length(iguodala_made[iguodala_made == "shot_yes"]) / length(iguodala_made)
+
+green_attempt = shots_data$shot_type[shots_data$name == "Draymond Green"]
+green_made = shots_data$shot_made[shots_data$name == "Draymond Green"]
+green2_attempt = green_attempt[green_attempt == "2PT Field Goal"]
+green2_made = green_made[green_attempt == "2PT Field Goal"]
+green2_success = green2_made[green2_made == "shot_yes"]
+green2_percent = length(green2_success) / length(green2_attempt)
+green3_attempt = green_attempt[green_attempt == "3PT Field Goal"]
+green3_made = green_made[green_attempt == "3PT Field Goal"]
+green3_success = green3_made[green3_made == "shot_yes"]
+green3_percent = length(green3_success) / length(green3_attempt)
+green_percent = length(green_made[green_made == "shot_yes"]) / length(green_made)
+
+durant_attempt = shots_data$shot_type[shots_data$name == "Kevin Durant"]
+durant_made = shots_data$shot_made[shots_data$name == "Kevin Durant"]
+durant2_attempt = durant_attempt[durant_attempt == "2PT Field Goal"]
+durant2_made = durant_made[durant_attempt == "2PT Field Goal"]
+durant2_success = durant2_made[durant2_made == "shot_yes"]
+durant2_percent = length(durant2_success) / length(durant2_attempt)
+durant3_attempt = durant_attempt[durant_attempt == "3PT Field Goal"]
+durant3_made = durant_made[durant_attempt == "3PT Field Goal"]
+durant3_success = durant3_made[durant3_made == "shot_yes"]
+durant3_percent = length(durant3_success) / length(durant3_attempt)
+durant_percent = length(durant_made[durant_made == "shot_yes"]) / length(durant_made)
+
+thompson_attempt = shots_data$shot_type[shots_data$name == "Klay Thompson"]
+thompson_made = shots_data$shot_made[shots_data$name == "Klay Thompson"]
+thompson2_attempt = thompson_attempt[thompson_attempt == "2PT Field Goal"]
+thompson2_made = thompson_made[thompson_attempt == "2PT Field Goal"]
+thompson2_success = thompson2_made[thompson2_made == "shot_yes"]
+thompson2_percent = length(thompson2_success) / length(thompson2_attempt)
+thompson3_attempt = thompson_attempt[thompson_attempt == "3PT Field Goal"]
+thompson3_made = thompson_made[thompson_attempt == "3PT Field Goal"]
+thompson3_success = thompson3_made[thompson3_made == "shot_yes"]
+thompson3_percent = length(thompson3_success) / length(thompson3_attempt)
+thompson_percent = length(thompson_made[thompson_made == "shot_yes"]) / length(thompson_made)
+
+gsw2 = data.frame("name" = c("Stephen Curry", "Andre Iguodala", "Draymond Green", "Kevin Durant", "Klay Thompson"),
+                  "total" = c(length(curry2_attempt), length(iguodala2_attempt), length(green2_attempt), length(durant2_attempt), length(thompson2_attempt)),
+                  "made" = c(length(curry2_success), length(iguodala2_success), length(green2_success), length(durant2_success), length(thompson2_success)),
+                  "perc_made" = c(curry2_percent, iguodala2_percent, green2_percent, durant2_percent, thompson2_percent))
+gsw2 = gsw2[order(-gsw2$perc_made), ]
+
+gsw3 = data.frame("name" = c("Stephen Curry", "Andre Iguodala", "Draymond Green", "Kevin Durant", "Klay Thompson"),
+                  "total" = c(length(curry3_attempt), length(iguodala3_attempt), length(green3_attempt), length(durant3_attempt), length(thompson3_attempt)),
+                  "made" = c(length(curry3_success), length(iguodala3_success), length(green3_success), length(durant3_success), length(thompson3_success)),
+                  "perc_made" = c(curry3_percent, iguodala3_percent, green3_percent, durant3_percent, thompson3_percent))
+gsw3 = gsw3[order(-gsw3$perc_made), ]
+
+gsw = data.frame("name" = c("Stephen Curry", "Andre Iguodala", "Draymond Green", "Kevin Durant", "Klay Thompson"),
+                  "total" = c(length(curry_attempt), length(iguodala_attempt), length(green_attempt), length(durant_attempt), length(thompson_attempt)),
+                  "made" = c(length(curry2_success) + length(curry3_success), length(iguodala2_success) + length(iguodala3_success), length(green2_success) + length(green3_success), length(durant2_success) + length(durant3_success), length(thompson2_success) + length(thompson3_success)),
+                  "perc_made" = c(curry_percent, iguodala_percent, green_percent, durant_percent, thompson_percent))
+gsw = gsw[order(-gsw$perc_made), ]
+```
+
+The 2016 season for the Golden State Warriors stars Stephen Curry, Andre Iguodala, Kevin Durant, Klay Thompson, and Draymond Green was filled with excitement. In this report, we 
+analyze the scoring patterns of the aforementioned Golden State Warriors.  
+  
+  
+In the 2016 season, Kevin Durant led the Golden State Warriors in percentage of shots made, successfully scoring over 54% of shots he took this season. (We include both 2 and 3 point field goals in the total percentage of shots made). However, Durant only made a total of 495 shots whereas star Stephen Curry made a total of 584 shots. Out of these 584 successful shots, Stephen Curry successfully made 280 3 point field goals. This means Curry has averaged almost 41% of 3 point field goals. While Curry successfully made the most 3 point field goals, Klay Thompson has the highest percentage of successful 3 point field goals, at over 42%, as well as the second most number of 3 point field goals made, at 246. Andre Iguodala leads the percentage of 2 point field goals made at a whopping 63%, shooting 134 2 point field goals successfully. However, despite his high 2 point field goal success percentage, 2 point field goal success percentage followup Kevin Durant made 390 2 point field goals. As we can see, field goal shot success percentage is not the only factor to keep in mind, as Kevin Durant scores nearly 3 times as many 2 point field goals as Andre Iguodala while trailing in percentage of successful 2 point field goals. The rest of the data about effective shooting percentages is shown in the table below.  
+
+Overall Percentages of Successful Field Goals  
+
+```{r Overall Percentages of Successful Field Goals, echo=FALSE}
+gsw
+```
+Overall Percentages of Successful 2 Point Field Goals  
+
+```{r, echo=FALSE}
+gsw2
+```
+
+Overall Percentages of Successful 3 Point Field Goals  
+
+```{r, echo=FALSE}
+gsw3
+```
+  
+  
+
+Next we look at the shooting charts of the five aforementioned NBA players.  
+  
+```{r echo = FALSE, fig.align='center'}
+knitr::include_graphics("../images/gsw-shot-charts.png")
+
+```
+
+As we can see, Klay Thompson and Stephen Curry have a wide range of position from where they took field goal shots. In addition, Klay Thompson and Stephen Curry both have many taken many shots, contrasted with Andre Iguodala's sparser dotted chart. This also emphasizes that we cannot only look at one aspect of player performance - Andre Iguodala has a very high successful shot percentage, yet has scored far fewer goals than Kevin Durant.  
+  
+  
+Above we mentioned Iguodala's scoring percentage and fewer goals scored. On the other hand, Kevin Durant has taken 915 total shots whereas Iguodala has only taken 371 total shots. This explains why Kevin Durant has made double (915) the amount of total goals Iguodala has made (192). In conclusion, we should keep in mind that when analyzing basketball players, we should consider a wide range of aspects of their performance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

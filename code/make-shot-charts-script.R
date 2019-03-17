@@ -88,14 +88,18 @@ pdf("../images/klay-thompson-shot-chart.pdf", width = 6.5, height = 5)
 thompson_shot_chart
 dev.off()
 
+shot_data = read.csv("../data/shots-data.csv")
+shot = ggplot(data = shot_data) +
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(x = x, y = y, color = shot_made_flag)) +
+  ylim(-50, 420) +
+  ggtitle("Shot Chart GSW (2016 season)") +
+  theme_minimal()
+
 pdf("../images/gsw-shot-charts.pdf", width = 8, height = 7)
-grid.arrange(curry_shot_chart, iguodala_shot_chart,
-             green_shot_chart, durant_shot_chart,
-             thompson_shot_chart, nrow = 2)
+shot + facet_wrap( ~ name, nrow = 2)
 dev.off()
 
 png("../images/gsw-shot-charts.png", width = 8, height = 7, units = "in", res = 2400)
-grid.arrange(curry_shot_chart, iguodala_shot_chart,
-             green_shot_chart, durant_shot_chart,
-             thompson_shot_chart, nrow = 2)
+shot + facet_wrap( ~ name, nrow = 2)
 dev.off()
