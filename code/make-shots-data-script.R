@@ -1,4 +1,7 @@
-#NBA Data Prep
+#Title: NBA Data Prep
+#Description: Create data summaries of the 5 given NBA Players
+#Inputs: CSV files from given website
+#Outputs: txt file summaries of given data and clarifications/adjustments made to original data tables
 
 curry = read.csv("../data/stephen-curry.csv", stringsAsFactors = FALSE)
 iguodala = read.csv("../data/andre-iguodala.csv", stringsAsFactors = FALSE)
